@@ -6,7 +6,7 @@ from flask_login import (
     login_user,
     login_required,
     logout_user,
-    current_user,
+    current_user
 )
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -24,6 +24,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+def init_db():
+    with app.app_context():
+        db.create_all()
+
+init_db()
 # ---------------------------------------------------------------------
 # Flask-Login setup
 # ---------------------------------------------------------------------
