@@ -24,11 +24,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-def init_db():
-    with app.app_context():
-        db.create_all()
-
-init_db()
 # ---------------------------------------------------------------------
 # Flask-Login setup
 # ---------------------------------------------------------------------
@@ -55,6 +50,15 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # ---------------------------------------------------------------------
+# Init DB *μετά* τα models
+# ---------------------------------------------------------------------
+def init_db():
+    with app.app_context():
+        db.create_all()
+
+init_db()
+
+# ---------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------
 @app.route("/")
@@ -66,7 +70,6 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    # If user is already logged in, redirect away
     if current_user.is_authenticated:
         return redirect(url_for("index"))
 
@@ -89,7 +92,6 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    # If user already logged in → forbid access
     if current_user.is_authenticated:
         return redirect(url_for("index"))
 
@@ -126,6 +128,7 @@ def protected():
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
 
 # ---------------------------------------------------------------------
 # Entry point
