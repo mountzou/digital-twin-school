@@ -63,9 +63,10 @@ init_db()
 # ---------------------------------------------------------------------
 @app.route("/")
 def index():
-    if current_user.is_authenticated:
-        return f"Home Page — Logged in as: {current_user.email}"
-    return "Home Page — User logged in? False"
+    return render_template(
+        "index.html",
+        user=current_user if current_user.is_authenticated else None
+    )
 
 
 @app.route("/login", methods=["GET", "POST"])

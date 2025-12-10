@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Home — Digital Twin School{% endblock %}
+
+{% block content %}
+    {% if user %}
+        <div class="card p-4 shadow-sm">
+            <h3>Welcome, {{ user.email }}!</h3>
+            <p>You are successfully logged in.</p>
+        </div>
+    {% else %}
+        <div class="card p-4 shadow-sm">
+            <h3>Welcome to Digital Twin School</h3>
+            <p>Please login or register to continue.</p>
+
+            <a href="{{ url_for('login') }}" class="btn btn-primary mt-3">Login</a>
+            <a href="{{ url_for('register') }}" class="btn btn-secondary mt-3 ms-2">Register</a>
+        </div>
+    {% endif %}
+{% endblock %}
