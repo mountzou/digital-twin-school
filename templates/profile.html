@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Profile — Digital Twin School{% endblock %}
+
+{% block content %}
+<div class="container py-5 py-md-6">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+
+            <h2 class="mb-4 text-center">Your Profile</h2>
+
+            <div class="card shadow-sm p-4">
+
+                <div class="mb-3">
+                    <label class="fw-bold">First Name:</label>
+                    <div>{{ user.first_name or "-" }}</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">Last Name:</label>
+                    <div>{{ user.last_name or "-" }}</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">Email:</label>
+                    <div>{{ user.email }}</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">Created At:</label>
+                    <div>{{ user.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">Last Login:</label>
+                    <div>
+                        {% if user.last_login %}
+                            {{ user.last_login.strftime("%Y-%m-%d %H:%M:%S") }}
+                        {% else %}
+                            Never logged in yet
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary me-2">Home</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+
+            <div class="text-center mt-3">
+    <a href="{{ url_for('edit_profile') }}" class="btn btn-outline-secondary">Edit Profile</a>
+</div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

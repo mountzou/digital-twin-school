@@ -37,9 +37,13 @@ login_manager.login_view = "login"
 # User model
 # ---------------------------------------------------------------------
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True, nullable=False)
+    id          = db.Column(db.Integer, primary_key=True)
+    email       = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
+    first_name  = db.Column(db.String(100), nullable=True)
+    last_name   = db.Column(db.String(100), nullable=True)
+    created_at  = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    last_login  = db.Column(db.DateTime, nullable=True)
 
     def set_password(self, password: str) -> None:
         self.password_hash = generate_password_hash(password)
@@ -58,8 +62,6 @@ def init_db():
     with app.app_context():
         db.create_all()
 
-init_db()
-
 # ---------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------
@@ -69,6 +71,42 @@ def index():
     if current_user.is_authenticated:
         return render_template("index.html", current_year=year, user=current_user)
     return render_template("index.html", current_year=year, user=None)
+
+
+@app.route("/profile")
+@login_required
+def profile():
+    year = datetime.now().year
+    return render_template("profile.html", user=current_user, current_year=year)
+
+
+@app.route("/edit-profile", methods=["GET", "POST"])
+@login_required
+def edit_profile():
+    error = None
+    success = None
+
+    if request.method == "POST":
+        first = request.form.get("first_name")
+        last = request.form.get("last_name")
+
+        # Update fields
+        current_user.first_name = first
+        current_user.last_name = last
+
+        try:
+            db.session.commit()
+            success = "Profile updated successfully."
+        except Exception:
+            db.session.rollback()
+            error = "An error occurred while updating your profile."
+
+    return render_template(
+        "edit-profile.html",
+        user=current_user,
+        error=error,
+        success=success
+    )
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -85,6 +123,8 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         if user and user.check_password(password):
+            user.last_login = datetime.utcnow()
+            db.session.commit()
             login_user(user)
             return redirect(url_for("index"))
         else:
@@ -101,6 +141,8 @@ def register():
     error = None
 
     if request.method == "POST":
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
         email = request.form.get("email")
         password = request.form.get("password")
         password_confirm = request.form.get("password_confirm")
@@ -110,7 +152,11 @@ def register():
         elif User.query.filter_by(email=email).first():
             error = "Email is already registered."
         else:
-            new_user = User(email=email)
+            new_user = User(
+                email=email,
+                first_name=first_name,
+                last_name=last_name
+            )
             new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()

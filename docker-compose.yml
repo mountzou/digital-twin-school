@@ -6,7 +6,10 @@ services:
       - "8000:5000"
     environment:
       - FLASK_ENV=development
+      - FLASK_DEBUG=1
       - DATABASE_URL=postgresql://flaskuser:flaskpass@db:5432/flaskdb
+    volumes:
+      - .:/app              # <— live-mount your source code
     depends_on:
       - db
 
