@@ -11,6 +11,8 @@ from flask_login import (
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from datetime import datetime
+
 # ---------------------------------------------------------------------
 # Flask app setup
 # ---------------------------------------------------------------------
@@ -63,10 +65,10 @@ init_db()
 # ---------------------------------------------------------------------
 @app.route("/")
 def index():
-    return render_template(
-        "index.html",
-        user=current_user if current_user.is_authenticated else None
-    )
+    year = datetime.now().year
+    if current_user.is_authenticated:
+        return render_template("index.html", current_year=year, user=current_user)
+    return render_template("index.html", current_year=year, user=None)
 
 
 @app.route("/login", methods=["GET", "POST"])

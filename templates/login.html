@@ -3,46 +3,57 @@
 {% block title %}Login — Digital Twin School{% endblock %}
 
 {% block content %}
-    <h2 class="mb-3">Login</h2>
+<div class="container py-5 py-md-6 font-nunito">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
 
-    {% if error %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
+            <h2 class="mb-4 text-center">Login</h2>
+
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="post" class="card p-4 shadow-sm">
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-2">
+                    Login
+                </button>
+
+                <p class="mt-3 mb-1 text-center">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}">Register here</a>
+                </p>
+
+                <p class="mb-0 text-center">
+                    <a href="{{ url_for('index') }}">Back to home</a>
+                </p>
+
+            </form>
         </div>
-    {% endif %}
-
-    <form method="post" class="mt-3" style="max-width: 400px;">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input
-                id="email"
-                type="email"
-                name="email"
-                class="form-control"
-                required
-            >
-        </div>
-
-        <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input
-                id="password"
-                type="password"
-                name="password"
-                class="form-control"
-                required
-            >
-        </div>
-
-        <button type="submit" class="btn btn-primary">Login</button>
-
-        <p class="mt-3">
-            Don't have an account?
-            <a href="{{ url_for('register') }}">Register here</a>
-        </p>
-
-        <p class="mt-2">
-            <a href="{{ url_for('index') }}">Back to home</a>
-        </p>
-    </form>
-{% endblock %}
+    </div>
+</div>
+{% endblock %}s

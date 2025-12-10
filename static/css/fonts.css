@@ -1,0 +1,115 @@
+/* ----------------------------------------------------------
+   N U N I T O
+---------------------------------------------------------- */
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/Nunito-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/Nunito-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/Nunito-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/Nunito-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/Nunito-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+/* ----------------------------------------------------------
+   R U B I K
+---------------------------------------------------------- */
+@font-face {
+    font-family: "Rubik";
+    src: url("../fonts/Rubik-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../fonts/Rubik-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../fonts/Rubik-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../fonts/Rubik-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../fonts/Rubik-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+/* ----------------------------------------------------------
+   J O S E F I N   S A N S
+---------------------------------------------------------- */
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("../fonts/JosefinSans-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("../fonts/JosefinSans-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("../fonts/JosefinSans-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("../fonts/JosefinSans-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("../fonts/JosefinSans-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
